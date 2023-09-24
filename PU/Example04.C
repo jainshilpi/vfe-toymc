@@ -42,7 +42,8 @@ void Example04()
   //TFile *file = new TFile("data/waveform_signal_10GeV_pu_0.root");
   //TFile *file = new TFile("output_example2_noPU.root");
   //TString fileName = Form("/eos/user/s/shilpi/SWAN_projects/ECAL_noise_EM_discrimination/data/noise_0p06/1GeV/outputPSWithPU.root");
-  TString fileName = Form("/eos/user/s/shilpi/SWAN_projects/ECAL_noise_EM_discrimination/data/outputPSWithPU_0.150000.root");
+  //TString fileName = Form("/eos/user/s/shilpi/SWAN_projects/ECAL_noise_EM_discrimination/data/outputPSWithPU_0.150000.root");
+  TString fileName = Form("/eos/user/s/shilpi/SWAN_projects/ECAL_noise_EM_discrimination/data/noise_0p15/0p15GeV/outputPSWithPU.root");
   TFile *file = new TFile(fileName);
 
   cout<<"input file name is "<<fileName.Data()<<endl;
@@ -86,6 +87,8 @@ void Example04()
   int nentries = tree->GetEntries();
   for(int ievt=0; ievt<nentries; ievt++){
 
+    tree->GetEntry(ievt);
+
     double samplesUncorrelated[NSAMPLES];
     
     for(int i=0; i<NSAMPLES; ++i){
@@ -109,7 +112,7 @@ void Example04()
       PUOnlywaveform_[i] = PUOnlywaveform[index];
       //cout<<"isample : Samples : PU : samplesNoise "<<i<<" "<<samples[i]<<" "<<PUOnlywaveform[index]<<" "<<samplesNoise[i]<<endl;
 
-      if( fabs(samplesNoise[i]) > maxNoiseSample)
+      if( (samplesNoise[i]) > maxNoiseSample)
 	maxNoiseSample = fabs(samplesNoise[i]);
     }
     ysamplesNoise[0] = 0;
@@ -125,13 +128,13 @@ void Example04()
 
     // add signal and pileup
     //SJ comment: It seems more like adding waveform with PU WITH Noise
-    tree->GetEntry(ievt);
+    //tree->GetEntry(ievt);
     double maxSample = -99;
 
     for(int i=0; i<NSAMPLES; ++i){
       int index = IDSTART + i * NFREQ;
       samples[i]   += waveform[index];
-      if( fabs(samples[i]) > maxSample)
+      if( (samples[i]) > maxSample)
 	maxSample = fabs(samples[i]);
     }    
     ysamples[0] = 1;

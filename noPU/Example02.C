@@ -54,10 +54,12 @@ void Example02()
   //const TString fileOutput      = "output.root";
   //string subDir = Form("%d",signalAmplitude);
   const TString fileOutput      = "/eos/user/s/shilpi/SWAN_projects/ECAL_noise_EM_discrimination/data/outputPSWithoutPU";
+  //const TString fileOutput      = "output";
   //const int     nPU             = 0;
   const int     nPU             = 50;
   //const int     nEventsTotal    = 100;
   const int     nEventsTotal    = 100000;
+  //const int     nEventsTotal    = 1;
   //const float   eta             = 0.0;
   const float   eta             = 1.4;
   

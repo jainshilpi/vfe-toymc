@@ -19,7 +19,8 @@ void Example03()
   TCanvas *c = new TCanvas("c", "c", 300,300);
   //TFile *file = new TFile("data/waveform_signal_10GeV_eta_0.0_pu_140.root");
   //TFile *file = new TFile("output_example2_noPU.root");
-  TFile *file = new TFile("outputPSWithPU.root");
+  //TFile *file = new TFile("outputPSWithPU.root");
+  TFile *file = new TFile("output_10.000000.root");
   //TFile *file = new TFile("output_example2_PU50.root");
 
   int    nWF;
@@ -28,17 +29,22 @@ void Example03()
   tree->SetBranchAddress("nWF",      &nWF);
   tree->SetBranchAddress("waveform", waveform);
 
-  tree->GetEntry(10);
+  //tree->GetEntry(10);
+  tree->GetEntry(0);
   
   TGraph *gr = new TGraph();
   for(int i=0; i<nWF; i++){
     gr->SetPoint(i, i, waveform[i]);
   }
 
+  //TCanvas *c = new TCanvas("c",500,500);
   gr->SetLineWidth(3);
   gr->Draw("AL");
 
+  c->SaveAs("plot_ps.C");
+  c->SaveAs("plot_ps.png");
 
+  /*
   ///Draw another one 
   TFile *file1 = new TFile("outputPS.root");
 
@@ -60,5 +66,6 @@ void Example03()
   c->Modified();
   c->Update();
   c->SaveAs("ps_withPU_noPU.png");
+  */
 
 }
